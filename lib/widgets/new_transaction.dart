@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -44,6 +46,7 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
     return SingleChildScrollView(
       child: Card(
         child: Container(
@@ -51,7 +54,7 @@ class _NewTransactionState extends State<NewTransaction> {
             top: 10,
             left: 10,
             right: 10,
-            bottom: MediaQuery.of(context).viewInsets.bottom + 10,
+            bottom: mediaQuery.viewInsets.bottom + 10,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -94,14 +97,24 @@ class _NewTransactionState extends State<NewTransaction> {
                   ],
                 ),
               ),
-              RaisedButton(
-                child: Text('Add Transaction'),
-                onPressed: () {
-                  _submitInput();
-                },
-                color: Theme.of(context).primaryColor,
-                textColor: Theme.of(context).textTheme.button.color,
-              )
+              Platform.isIOS
+                  ? CupertinoButton(
+                      child: Text('Add Transaction'),
+                      onPressed: () {
+                        _submitInput();
+                      },
+                      color: Theme.of(context).primaryColor,
+                      padding: EdgeInsets.all(10),
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                    )
+                  : RaisedButton(
+                      child: Text('Add Transaction'),
+                      onPressed: () {
+                        _submitInput();
+                      },
+                      color: Theme.of(context).primaryColor,
+                      textColor: Theme.of(context).textTheme.button.color,
+                    )
             ],
           ),
         ),
