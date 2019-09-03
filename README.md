@@ -20,3 +20,5 @@ In this app, user can:
 - View List of previous transaction
 - View a bar chart of his/her spending in the last 7 days
 - Delete a transaction
+- Different views for Android and iOS
+- Different views for potrait and landscape mode
